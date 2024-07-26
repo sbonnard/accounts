@@ -15,6 +15,10 @@ $currentTransactions = fetchAllTransactions($dbCo, $_GET);
 $monthTransactions = fetchMonthTransactions($dbCo, '2024-07');
 $balance = calculateBalance($dbCo);
 
+
+if (isset($_REQUEST['id']) && $_REQUEST['action'] === 'delete' && intval($_REQUEST['id'])) {
+    deleteTransaction($dbCo);
+}
 ?>
 
 <!DOCTYPE html>

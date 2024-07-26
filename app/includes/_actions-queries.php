@@ -17,7 +17,7 @@ function checkFormInfosTransaction(): void
         $errors[] = 'erreur date';
     }
 
-    if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || $_POST['amount'] === 0) {
+    if (!isset($_POST['amount']) || !is_numeric($_POST['amount']) || floatval($_POST['amount']) === 0) {
         addError('amount_ko');
         $errors[] = 'erreur montant';
     }
@@ -29,7 +29,7 @@ function checkFormInfosTransaction(): void
  * @param PDO $dbCo - Connection to database.
  * @return bool
  */
-function addSpending(PDO $dbCo):bool
+function addSpending(PDO $dbCo): bool
 {
     $errors = [];
 
@@ -70,7 +70,7 @@ function addSpending(PDO $dbCo):bool
  * @param [type] $dbCo - Connection to database.
  * @return bool
  */
-function updateTransaction(PDO $dbCo):bool
+function updateTransaction(PDO $dbCo): bool
 {
     $errors = [];
 
@@ -103,3 +103,5 @@ function updateTransaction(PDO $dbCo):bool
         return $isUpdateOk;
     }
 }
+
+

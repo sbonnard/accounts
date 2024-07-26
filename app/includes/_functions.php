@@ -116,7 +116,7 @@ function getMyTransactions(array $transactions): string
                 <a href="?action=modify&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-primary btn-sm rounded-circle">
                     <i class="bi bi-pencil"></i>
                 </a>
-                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+                <a href="?action=delete&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-danger btn-sm rounded-circle">
                     <i class="bi bi-trash"></i>
                 </a>
             </td>
@@ -201,4 +201,28 @@ function getIdFromGet(array $arrayGET)
         return '';
     }
     return intval($arrayGET['id']);
+}
+
+
+function deleteTransaction(PDO $dbCo)
+{
+    $queryDelete = $dbCo->prepare(
+        'DELETE FROM transaction
+        WHERE id_transaction = :id;'
+    );
+
+    $bindValues = [
+        'id' => $_REQUEST['id']
+    ];
+
+    $isDeleteOk = $queryDelete->execute($bindValues);
+
+    if ($isDeleteOk) {
+        addMessage('delete_ok');
+    }
+    if (!$isDeleteOk) {
+        addError('delete_ko');
+    }
+
+    return $isDeleteOk;
 }
