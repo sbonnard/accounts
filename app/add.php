@@ -59,7 +59,7 @@ generateToken();
                 <h1 class="my-0 fw-normal fs-4">Ajouter une opération</h1>
             </div>
             <div class="card-body">
-                <form>
+                <form method="post" action="actions.php">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nom de l'opération *</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Facture d'électricité" required>
@@ -92,6 +92,9 @@ generateToken();
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
                     </div>
+
+                    <input type="hidden" name="action" value="add-spending">
+                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                 </form>
             </div>
         </section>

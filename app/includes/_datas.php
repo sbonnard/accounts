@@ -11,6 +11,7 @@ function fetchTransactions(PDO $dbCo): array
     $query = $dbCo->query('
     SELECT *
     FROM transaction
+    WHERE date_transaction LIKE "%2024-07%"
     ORDER BY date_transaction DESC;');
 
     $datasTransaction =  $query->fetchAll(PDO::FETCH_ASSOC);
