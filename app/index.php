@@ -11,12 +11,9 @@ require_once "includes/components/_head.php";
 
 generateToken();
 
-$transactions = fetchAllTransactions($dbCo);
+$currentTransactions = fetchAllTransactions($dbCo, $_GET);
 $monthTransactions = fetchMonthTransactions($dbCo, '2024-07');
 $balance = calculateBalance($dbCo);
-
-// var_dump($transactions);
-// var_dump($balance);
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +70,7 @@ $balance = calculateBalance($dbCo);
         </section>
 
         <?php
-        echo getModifyForm($transactions);
+        echo getModifyForm($currentTransactions);
         ?>
 
 

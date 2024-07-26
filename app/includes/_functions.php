@@ -139,23 +139,23 @@ function validateDate($date, $format = 'Y-m-d')
 }
 
 
-function getModifyForm(array $data = []):string
+function getModifyForm(array $transactions): string
 {
     return '
     <section id="form-modify">
     <form method="post" action="actions.php">
         <div class="mb-3">
             <label for="update-name" class="form-label">Nom de l\'opération *</label>
-            <input type="text" class="form-control" name="update-name" id="update-name" placeholder="Facture d\'électricité" required value="' . (isset($data['name']) ? $data['name'] : '') . '">
+            <input type="text" class="form-control" name="update-name" id="update-name" placeholder="Facture d\'électricité" required value="' . $transactions[0]['name'] . '">
         </div>
         <div class="mb-3">
             <label for="update-date" class="form-label">Date *</label>
-            <input type="date" class="form-control" name="update-date" id="update-date" required value="' . (isset($data['date']) ? $data['date'] : '') . '">
+            <input type="date" class="form-control" name="update-date" id="update-date" required value="' . $transactions[0]['date_transaction'] . '">
         </div>
         <div class="mb-3">
             <label for="update-amount" class="form-label">Montant *</label>
             <div class="input-group">
-                <input type="text" class="form-control" name="update-amount" id="update-amount" required value="' . (isset($data['amount']) ? $data['amount'] : '') . '">
+                <input type="text" class="form-control" name="update-amount" id="update-amount" required value="' . $transactions[0]['amount'] . '">
                 <span class="input-group-text">€</span>
             </div>
         </div>
@@ -183,36 +183,16 @@ function getModifyForm(array $data = []):string
 </section>';
 }
 
-
-
 /**
- * Get HTML code to display a form in order to create or modify a product.
+ * Get the id value grom $_GET surperglobal.
  *
- * @param string $action Action to execute : 'create' or 'modify'
- * @param array $data Associative array with prefilled value for each field.
- * @return string HTMLM to code to display the form
+ * @param array $arrayGET - Superglobal $_GET
+ * @return integer - ID number
  */
-function getHtmlModifyForm(string $action = 'modify', array $data = []): string
+function getIdFromGet(array $arrayGET):int
 {
-    $html = 
-    
-    '<section id="form-modify">
-    <form id="productForm" action="actions.php" method="post">'
-        . '<ul>'
-        . '<li>'
-        . '<label for="name_product">Nom du produit</label> '
-        . '<input type="text" name="name_product" id="name_product" . value="' . (isset($data['name_product']) ? $data['name_product'] : '') . '" placeholder="Oil - . Canola" maxlength="50" required>'
-        . '</li>'
-        . '<li>'
-        . '<label for="price">Prix du produit</label> '
-        . '<input type="text" name="price" id="price" value="' . (isset($data['price']) ? $data['price'] : '') . '" placeholder="9.90" maxlength="16" required>'
-        . '</li>'
-        . '</ul>
-        <input type="hidden" name="ref_product" value="' . (isset($data['ref_product']) ? $data['ref_product'] : '') . '">
-<input type="hidden" id="token" name="token" value="' . $_SESSION['token'] . '">'
-        . '<input type="hidden" name="action" value="' . $action . '">'
-        . '<input type="submit" value="Modifier">'
-        . '</form>';
-
-    return $html;
+    if (!isset($arrayGET['id'])) {
+        return '';
+    }
+    return intval($arrayGET['id']);
 }

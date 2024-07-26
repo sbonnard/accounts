@@ -1,11 +1,20 @@
 <?
 
+require_once '_functions.php';
+
 function fetchAllTransactions (PDO $dbCo) {
-    $query = $dbCo->query(
+    $query = $dbCo->prepare(
         'SELECT *
         FROM transaction
+        WHERE id_transaction = :id
         ORDER BY date_transaction DESC;'
     );
+
+    $bindValues = [
+        'id' => getIdFromGet($_GET)
+    ];
+
+    $result = $query->execute($bindValues);
 
     $allDatas = $query->fetchAll(PDO::FETCH_ASSOC);
 
