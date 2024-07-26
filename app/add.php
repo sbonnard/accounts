@@ -58,6 +58,10 @@ generateToken();
             <div class="card-header py-3">
                 <h1 class="my-0 fw-normal fs-4">Ajouter une opération</h1>
             </div>
+            <?php
+            echo getSuccessMessage($messages);
+            echo getErrorMessage($errors);
+            ?>
             <div class="card-body">
                 <form method="post" action="actions.php">
                     <div class="mb-3">

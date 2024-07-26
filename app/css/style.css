@@ -1,0 +1,17 @@
+* {
+    --success: #126a0d;
+    --error: #660e0e;
+}
+
+.notif {
+    font-size: 20px;
+    text-align: center;
+}
+
+.notif--success {
+    color: var(--success);
+}
+
+.notif--error {
+    color: var(--error);
+}

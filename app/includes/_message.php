@@ -1,26 +1,17 @@
 <?php
 
 $messages = [
-    'insert_ok' => 'JDR ajoutée.',
-    'create_ok' => 'Réussite critique lors de la création de compte !',
-    'update_ok_bio' => 'Réussite critique lors de la mise à jour de la bio !',
-    'update_ok_pwd' => 'Réussite critique lors de la mise à jour du mot de passe !',
-    'update_ok_favourites' => 'Réussite critique lors de la modification d\'univers favoris !',
-    'delete_ok' => 'L\'univers a été supprimé.'
+    'insert_ok' => 'Dépense ajoutée.',
 ];
 
 $errors = [
     'csrf' => 'Votre session est invalide.',
     'referer' => 'D\'où venez vous ?',
     'no_action' => 'Aucune action détectée.',
-    'no_search' => 'La recherche n\'a rien donné.',
-    'create_ko' => 'Échec critique lors de la création de compte !',
-    'update_ko_bio' => 'Échec critique lors de la mise à jour de la bio !',
-    'update_ko_pwd' => 'Échec critique lors de la mise à jour du mot de passe !',
-    'update_ko_favourites' => 'Échec critique lors de la modification d\'univers favoris !',
-    'email_ko' => 'Merci d\'entrer votre mot de passe',
-    'password_ko' => 'Merci de saisir votre mot de passe',
-    'login_ko' => 'Échec critique lors de la saisie du mot de passe ou de l\'email !'
+    'name_ko' => 'Le nom de dépense n\'est pas valide',
+    'date_ko' => 'La date saisie est invalide',
+    'amount_ko' => 'Le montant saisi doit être numérique et ne peut pas être 0',
+    'insert_ko' => 'Erreur lors de l\'ajout d\'une dépense.'
 ];
 
 
@@ -49,10 +40,7 @@ function triggerError(string $error): void
  */
 function addError(string $errorMsg): void
 {
-    if (!isset($_SESSION['errorsList'])) {
-        $_SESSION['errorsList'] = [];
-    }
-    $_SESSION['errorsList'][] = $errorMsg;
+    $_SESSION['error'] = $errorMsg;
 }
 
 

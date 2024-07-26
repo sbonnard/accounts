@@ -8,7 +8,7 @@ require_once 'includes/_message.php';
 require_once 'includes/_security.php';
 require_once 'includes/_actions-queries.php';
 
-header('Content-type:application/json');
+// header('Content-type:application/json');
 
 
 if (!isset($_REQUEST['action'])) {
