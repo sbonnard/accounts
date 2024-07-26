@@ -11,7 +11,8 @@ require_once "includes/components/_head.php";
 
 generateToken();
 
-$transactions = fetchTransactions($dbCo);
+$transactions = fetchAllTransactions($dbCo);
+$monthTransactions = fetchMonthTransactions($dbCo, '2024-07');
 $balance = calculateBalance($dbCo);
 
 // var_dump($transactions);
@@ -71,6 +72,11 @@ $balance = calculateBalance($dbCo);
             </div>
         </section>
 
+        <?php
+        echo getModifyForm($transactions);
+        ?>
+
+
         <section class="card mb-4 rounded-3 shadow-sm">
             <div class="card-header py-3">
                 <h1 class="my-0 fw-normal fs-4">Opérations de Juillet 2023</h1>
@@ -85,7 +91,7 @@ $balance = calculateBalance($dbCo);
                         </tr>
                     </thead>
                     <tbody>
-                        <?= getMyTransactions($transactions); ?>
+                        <?= getMyTransactions($monthTransactions); ?>
                     </tbody>
                 </table>
             </div>

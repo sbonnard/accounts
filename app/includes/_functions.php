@@ -103,8 +103,8 @@ function getMyTransactions(array $transactions): string
             <td width="50" class="ps-3">
             </td>
             <td>
-                <time datetime="' . $transaction['date_transaction'] . '" class="d-block fst-italic fw-light">' 
-                . date("d-m-Y", strtotime($transaction['date_transaction'])) . '</time>'
+                <time datetime="' . $transaction['date_transaction'] . '" class="d-block fst-italic fw-light">'
+            . date("d-m-Y", strtotime($transaction['date_transaction'])) . '</time>'
             . $transaction['name'] .
             '</td>
             <td class="text-end">
@@ -113,7 +113,7 @@ function getMyTransactions(array $transactions): string
             ' €</span>
             </td>
             <td class="text-end text-nowrap">
-                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+                <a href="?action=modify&id=' . $transaction['id_transaction'] . '" class="btn btn-outline-primary btn-sm rounded-circle">
                     <i class="bi bi-pencil"></i>
                 </a>
                 <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
@@ -132,7 +132,87 @@ function getMyTransactions(array $transactions): string
  * @param string $format - The format of the date.
  * @return void
  */
-function validateDate($date, $format = 'Y-m-d') {
+function validateDate($date, $format = 'Y-m-d')
+{
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) === $date;
+}
+
+
+function getModifyForm(array $data = []):string
+{
+    return '
+    <section id="form-modify">
+    <form method="post" action="actions.php">
+        <div class="mb-3">
+            <label for="update-name" class="form-label">Nom de l\'opération *</label>
+            <input type="text" class="form-control" name="update-name" id="update-name" placeholder="Facture d\'électricité" required value="' . (isset($data['name']) ? $data['name'] : '') . '">
+        </div>
+        <div class="mb-3">
+            <label for="update-date" class="form-label">Date *</label>
+            <input type="date" class="form-control" name="update-date" id="update-date" required value="' . (isset($data['date']) ? $data['date'] : '') . '">
+        </div>
+        <div class="mb-3">
+            <label for="update-amount" class="form-label">Montant *</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="update-amount" id="update-amount" required value="' . (isset($data['amount']) ? $data['amount'] : '') . '">
+                <span class="input-group-text">€</span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="update-category" class="form-label">Catégorie</label>
+            <select class="form-select" name="update-category" id="update-category">
+                <option value="" selected>Aucune catégorie</option>
+                <option value="1">Nourriture</option>
+                <option value="2">Loisir</option>
+                <option value="3">Travail</option>
+                <option value="4">Voyage</option>
+                <option value="5">Sport</option>
+                <option value="6">Habitat</option>
+                <option value="7">Cadeaux</option>
+            </select>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
+        </div>
+
+        <input type="hidden" name="action" value="modify-operation">
+        <input type="hidden" name="token" value="' . $_SESSION['token'] . '">
+    </form>
+</section>';
+}
+
+
+
+/**
+ * Get HTML code to display a form in order to create or modify a product.
+ *
+ * @param string $action Action to execute : 'create' or 'modify'
+ * @param array $data Associative array with prefilled value for each field.
+ * @return string HTMLM to code to display the form
+ */
+function getHtmlModifyForm(string $action = 'modify', array $data = []): string
+{
+    $html = 
+    
+    '<section id="form-modify">
+    <form id="productForm" action="actions.php" method="post">'
+        . '<ul>'
+        . '<li>'
+        . '<label for="name_product">Nom du produit</label> '
+        . '<input type="text" name="name_product" id="name_product" . value="' . (isset($data['name_product']) ? $data['name_product'] : '') . '" placeholder="Oil - . Canola" maxlength="50" required>'
+        . '</li>'
+        . '<li>'
+        . '<label for="price">Prix du produit</label> '
+        . '<input type="text" name="price" id="price" value="' . (isset($data['price']) ? $data['price'] : '') . '" placeholder="9.90" maxlength="16" required>'
+        . '</li>'
+        . '</ul>
+        <input type="hidden" name="ref_product" value="' . (isset($data['ref_product']) ? $data['ref_product'] : '') . '">
+<input type="hidden" id="token" name="token" value="' . $_SESSION['token'] . '">'
+        . '<input type="hidden" name="action" value="' . $action . '">'
+        . '<input type="submit" value="Modifier">'
+        . '</form>';
+
+    return $html;
 }
