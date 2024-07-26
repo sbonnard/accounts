@@ -31,7 +31,7 @@ function fetchMonthTransactions(PDO $dbCo, string $yearMonth): array
 {
     $query = $dbCo->prepare('
     SELECT *
-    FROM transaction
+    FROM transaction t
     WHERE date_transaction LIKE :date
     ORDER BY date_transaction DESC;');
 

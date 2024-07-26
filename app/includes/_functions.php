@@ -94,11 +94,11 @@ function checkEnvironment(string $file)
     }
 }
 
-function getMyTransactions(array $transactions): string
+function getMyTransactions(PDO $dbCo, array $transactions): string
 {
-    $transationList = '';
+    $transactionList = '';
     foreach ($transactions as $transaction) {
-        $transationList .=
+        $transactionList .=
             '<tr>
             <td width="50" class="ps-3">
             </td>
@@ -122,7 +122,7 @@ function getMyTransactions(array $transactions): string
             </td>
         </tr>';
     }
-    return $transationList;
+    return $transactionList;
 }
 
 /**
@@ -182,7 +182,7 @@ function getModifyForm(array $transactions): string
             <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
         </div>
 
-        <input type="hidden" name="id_transaction" value="'. $transactions[0]['id_transaction'] .'">
+        <input type="hidden" name="id_transaction" value="' . $transactions[0]['id_transaction'] . '">
         <input type="hidden" name="action" value="modify-transaction">
         <input type="hidden" name="token" value="' . $_SESSION['token'] . '">
     </form>
@@ -203,8 +203,13 @@ function getIdFromGet(array $arrayGET)
     return intval($arrayGET['id']);
 }
 
-
-function deleteTransaction(PDO $dbCo)
+/**
+ * Deletes a transaction by clicking on a button.
+ *
+ * @param PDO $dbCo - Connection to database.
+ * @return bool
+ */
+function deleteTransaction(PDO $dbCo): bool
 {
     $queryDelete = $dbCo->prepare(
         'DELETE FROM transaction
@@ -227,3 +232,66 @@ function deleteTransaction(PDO $dbCo)
     return $isDeleteOk;
 }
 
+/**
+ * Checks category of a transaction to display its icon.
+ *
+ * @param array $transaction - Array with all transaction.
+ * @return void - A class name for icon.
+ */
+function checkCategory(array $transaction)
+{
+    if ($transaction['id_category'] === 1) {
+        echo
+        '<td width="50" class="ps-3">
+            <i class="bi bi-house-door fs-3"></i>
+        </td>';
+    }
+    if ($transaction['id_category'] === 2) {
+        echo
+        '<td width="50" class="ps-3">
+            <i class="bi bi-person-workspace fs-3"></i>
+        </td>';
+    }
+    if ($transaction['id_category'] === 3) {
+        echo
+        '<td width="50" class="ps-3">
+            <i class="bi bi-gift fs-3"></i>
+        </td>';
+    }
+    if ($transaction['id_category'] === 4) {
+        echo
+        '<td width="50" class="ps-3">
+            <i class="bi bi-wifi fs-3"></i>
+        </td>';
+    }
+    if ($transaction['id_category'] === 5) {
+        echo
+        '<td width="50" class="ps-3">
+            <i class="bi bi-egg-fried fs-3"></i>
+        </td>';
+    }
+    if ($transaction['id_category'] === 6) {
+        echo
+        '<td width="50" class="ps-3">
+            <i class="bi bi-train-front fs-3"></i>
+        </td>';
+        if ($transaction['id_category'] === 7) {
+            echo
+            '<td width="50" class="ps-3">
+            <i class="bi bi-emoji-smile fs-3"></i>
+        </td>';
+        }
+        if ($transaction['id_category'] === 8) {
+            echo
+            '<td width="50" class="ps-3">
+            <i class="bi bi-car-front fs-3"></i>
+        </td>';
+        }
+        if ($transaction['id_category'] === 9) {
+            echo
+            '<td width="50" class="ps-3">
+            <i class="bi bi-band-aid fs-3"></i>
+        </td>';
+        }
+    }
+}

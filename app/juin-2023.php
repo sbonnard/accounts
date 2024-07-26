@@ -13,7 +13,7 @@ require_once "includes/components/_templates.php";
 generateToken();
 
 $currentTransactions = fetchAllTransactions($dbCo, $_GET);
-$monthTransactions = fetchMonthTransactions($dbCo, '2024-07');
+$monthTransactions = fetchMonthTransactions($dbCo, '2024-06');
 $balance = calculateBalance($dbCo);
 
 if (isset($_REQUEST['id']) && $_REQUEST['action'] === 'delete' && intval($_REQUEST['id'])) {

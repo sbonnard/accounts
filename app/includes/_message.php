@@ -18,24 +18,6 @@ $errors = [
     'delete_ko' => 'Erreur lors de la suppression de la dépense.'
 ];
 
-
-/**
- * Triggers if an error occurs and exits script.
- *
- * @param string $error The name of the error from errors array.
- * @return void
- */
-function triggerError(string $error): void
-{
-    global $errors;
-    $response = [
-        'isOk' => false,
-        'errorMessage' => $errors[$error]
-    ];
-    echo json_encode($response);
-    exit;
-}
-
 /**
  * Add a new error message to display on next page. 
  *
