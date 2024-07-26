@@ -93,3 +93,34 @@ function checkEnvironment(string $file)
         // https://github.com/andrefelipe/vite-php-setup
     }
 }
+
+function getMyTransactions(array $transactions): string
+{
+    $transationList = '';
+    foreach ($transactions as $transaction) {
+        $transationList .=
+            '<tr>
+            <td width="50" class="ps-3">
+            </td>
+            <td>
+                <time datetime="' . $transaction['date_transaction'] . '" class="d-block fst-italic fw-light">' 
+                . date("d-m-Y", strtotime($transaction['date_transaction'])) . '</time>'
+            . $transaction['name'] .
+            '</td>
+            <td class="text-end">
+                <span class="rounded-pill text-nowrap bg-warning-subtle px-2">'
+            . $transaction['amount'] .
+            ' €</span>
+            </td>
+            <td class="text-end text-nowrap">
+                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>';
+    }
+    return $transationList;
+}

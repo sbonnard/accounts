@@ -9,6 +9,10 @@ require_once "includes/_message.php";
 require_once "includes/_datas.php";
 
 generateToken();
+
+$transactions = fetchTransactions($dbCo);
+
+// var_dump($transactions);
 ?>
 
 <!DOCTYPE html>
@@ -82,136 +86,7 @@ generateToken();
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td width="50" class="ps-3">
-                            </td>
-                            <td>
-                                <time datetime="2023-07-10" class="d-block fst-italic fw-light">10/07/2023</time>
-                                Bar
-                            </td>
-                            <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2">
-                                    - 32,00 €
-                                </span>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50" class="ps-3">
-                                <i class="bi bi-car-front fs-3"></i>
-                            </td>
-                            <td>
-                                <time datetime="2023-07-10" class="d-block fst-italic fw-light">10/07/2023</time>
-                                Essence voiture
-                            </td>
-                            <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2">
-                                    - 94,00 €
-                                </span>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50" class="ps-3">
-                            </td>
-                            <td>
-                                <time datetime="2023-07-08" class="d-block fst-italic fw-light">8/07/2023</time>
-                                Facture électricité
-                            </td>
-                            <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2">
-                                    - 83,00 €
-                                </span>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50" class="ps-3">
-                                <i class="bi bi-house-door fs-3"></i>
-                            </td>
-                            <td>
-                                <time datetime="2023-07-05" class="d-block fst-italic fw-light">5/07/2023</time>
-                                Loyer de Juillet 2023
-                            </td>
-                            <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2">
-                                    - 432,00 €
-                                </span>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50" class="ps-3">
-                                <i class="bi bi-train-front fs-3"></i>
-                            </td>
-                            <td>
-                                <time datetime="2023-07-02" class="d-block fst-italic fw-light">2/07/2023</time>
-                                Billets de train Lille
-                            </td>
-                            <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2">
-                                    - 89,00 €
-                                </span>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50" class="ps-3">
-                                <i class="bi bi-bandaid fs-3"></i>
-                            </td>
-                            <td>
-                                <time datetime="2023-07-02" class="d-block fst-italic fw-light">2/07/2023</time>
-                                Reboursement sécurité sociale
-                            </td>
-                            <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-success-subtle px-2">
-                                    + 48,00 €
-                                </span>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <?= getMyTransactions($transactions); ?>
                     </tbody>
                 </table>
             </div>
