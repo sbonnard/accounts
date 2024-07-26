@@ -27,9 +27,9 @@ function checkFormInfosTransaction(): void
  * Add a transaction into database.
  *
  * @param PDO $dbCo - Connection to database.
- * @return void
+ * @return bool
  */
-function addSpending(PDO $dbCo)
+function addSpending(PDO $dbCo):bool
 {
     $errors = [];
 
@@ -64,10 +64,14 @@ function addSpending(PDO $dbCo)
     }
 }
 
-
-function modifyTransaction($dbCo)
+/**
+ * Updates transaction's infos with a form.
+ *
+ * @param [type] $dbCo - Connection to database.
+ * @return bool
+ */
+function updateTransaction(PDO $dbCo):bool
 {
-    global $transactions;
     $errors = [];
 
     checkFormInfosTransaction();

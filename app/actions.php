@@ -25,7 +25,7 @@ if (!empty($_POST)) {
     }
 
     if ($_POST['action'] === 'modify-transaction') {
-        modifyTransaction($dbCo);
+        updateTransaction($dbCo);
     }
 }
 
