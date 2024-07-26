@@ -7,6 +7,7 @@ require_once "includes/_security.php";
 require_once "includes/_functions.php";
 require_once "includes/_message.php";
 require_once "includes/_datas.php";
+require_once "includes/components/_head.php";
 
 generateToken();
 
@@ -21,12 +22,7 @@ $balance = calculateBalance($dbCo);
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opérations de Juillet 2023 - Mes Comptes</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <?= fetchHead('Opérations de Juillet 2023 - Mes Comptes'); ?>
 </head>
 
 <body>
@@ -54,8 +50,7 @@ $balance = calculateBalance($dbCo);
             </nav>
             <form action="" class="col-12 col-md-4" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher..."
-                        aria-describedby="button-search">
+                    <input type="text" class="form-control" placeholder="Rechercher..." aria-describedby="button-search">
                     <button class="btn btn-primary" type="submit" id="button-search">
                         <i class="bi bi-search"></i>
                     </button>
@@ -72,7 +67,7 @@ $balance = calculateBalance($dbCo);
             <div class="card-body">
                 <p class="card-title pricing-card-title text-center fs-1">
                     <?= implode($balance[0]) ?>
-                 €</p>
+                    €</p>
             </div>
         </section>
 

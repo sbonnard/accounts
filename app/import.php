@@ -7,26 +7,16 @@ require_once "includes/_security.php";
 require_once "includes/_functions.php";
 require_once "includes/_message.php";
 require_once "includes/_datas.php";
+require_once "includes/components/_head.php";
 
 generateToken();
-
-$transactions = fetchTransactions($dbCo);
-$balance = calculateBalance($dbCo);
-
-// var_dump($transactions);
-// var_dump($balance);
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Importer des opérations - Mes Comptes</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<?= fetchHead('Importer des opérations - Mes Comptes') ?>
 </head>
 
 <body>
