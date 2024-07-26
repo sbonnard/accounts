@@ -226,3 +226,4 @@ function deleteTransaction(PDO $dbCo)
 
     return $isDeleteOk;
 }
+
