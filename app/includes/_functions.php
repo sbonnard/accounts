@@ -124,3 +124,15 @@ function getMyTransactions(array $transactions): string
     }
     return $transationList;
 }
+
+/**
+ * Validates a date for forms.
+ *
+ * @param [type] $date - The date to validate.
+ * @param string $format - The format of the date.
+ * @return void
+ */
+function validateDate($date, $format = 'Y-m-d') {
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+}

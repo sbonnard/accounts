@@ -18,3 +18,11 @@ if (!isset($_REQUEST['action'])) {
 // Check CSRF
 preventFromCSRF();
 
+if (!empty($_POST)) {
+
+    if ($_POST['action'] === 'add-spending') {
+        addSpending($dbCo);
+    }
+}
+
+redirectTo();
