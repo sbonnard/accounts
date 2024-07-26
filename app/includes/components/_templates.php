@@ -59,7 +59,10 @@ function fetchHeader(
             </nav>
             <form action="" class="col-12 col-md-4" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher..." aria-describedby="button-search">
+                    <input id="suggestionsField" type="text" class="form-control" placeholder="Rechercher..." aria-describedby="button-search">
+                        <div class="suggestions__list">
+                            <div class="suggestions" id="suggestions"></div>
+                        </div>
                     <button class="btn btn-primary" type="submit" id="button-search">
                         <i class="bi bi-search"></i>
                     </button>

@@ -107,6 +107,8 @@ if (isset($_REQUEST['id']) && $_REQUEST['action'] === 'delete' && intval($_REQUE
     <?= fetchFooter() ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/suggestion-bar.js"></script>
+
 </body>
 
 </html>

@@ -19,3 +19,67 @@
 .hidden {
     display: none;
 }
+
+/* Suggestions */
+
+.suggestions {
+    position: absolute;
+    z-index: 1;
+    width: 17.75rem;
+    background-color: grey;
+    border-bottom: 1px solid #0d6efd;
+    border-right: 1px solid #0d6efd;
+    border-left: 1px solid #0d6efd;
+    cursor: pointer;
+    right: 48%;
+    bottom: 0;
+}
+
+.suggestions__itm {
+    width: 100%;
+    font-size: 1rem;
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.form-control {
+    position: relative;
+}
+
+.suggestions__itm:hover {
+    background-color: #0d6efd;
+    color: grey;
+}
+
+.suggestions__itm:focus {
+    background-color: #0d6efd;
+    color: grey;
+}
+
+.suggestions__list {
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .suggestions__list {
+        width: 18.75rem;
+    }
+
+    .suggestions__txt {
+        max-width: 18.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .suggestions {
+        width: 18.75rem;
+    }
+
+    .form-control {
+        width: 31.625rem;
+    }
+}
+
+.suggestions--my-account {
+    bottom: -25%;
+}

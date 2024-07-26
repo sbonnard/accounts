@@ -295,3 +295,30 @@ function checkCategory(array $transaction)
         }
     }
 }
+
+function filterTransactions(PDO $dbCo, string $userSearch, array $transactions) {
+    $transactions = fetchAllTransactions($dbCo);
+
+    if (is_array($transactions)) {
+        $likeConditions = [];
+        $bindValues = [];
+        foreach ($transactions as $index => $transaction) {
+            $paramName = $index . $transaction;
+            $likeConditions[] = "name LIKE :" . $paramName;
+            $bindValues[$paramName] = '%' . $userSearch . '%';
+        }
+
+        $querySearch = $dbCo->prepare(
+            'SELECT id_transaction, name
+            FROM transaction
+            WHERE' . implode(" OR ", $likeConditions));
+        
+        $querySearch->execute($bindValues);
+
+        $resultsSearch = $querySearch->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultsSearch;
+    } else {
+        return false;
+    }
+}
