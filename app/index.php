@@ -14,6 +14,7 @@ generateToken();
 $currentTransactions = fetchAllTransactions($dbCo, $_GET);
 $monthTransactions = fetchMonthTransactions($dbCo, '2024-07');
 $balance = calculateBalance($dbCo);
+
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +71,8 @@ $balance = calculateBalance($dbCo);
         </section>
 
         <?php
+        echo getSuccessMessage($messages);
+        echo getErrorMessage($errors);
         if(isset($_GET['action']) && $_GET['action'] === 'modify' && isset($_GET['id']) && intval($_GET['id']))
         echo getModifyForm($currentTransactions);
         ?>

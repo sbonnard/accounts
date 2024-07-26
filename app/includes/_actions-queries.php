@@ -1,11 +1,12 @@
 <?php
 
-
-function addSpending(PDO $dbCo)
+/**
+ * Checks errors in form completion and adds errors if needed.
+ *
+ * @return void
+ */
+function checkFormInfosTransaction(): void
 {
-    $errors = [];
-
-
     if (!isset($_POST['name']) || strlen($_POST['name'] <= 0)) {
         addError('name_ko');
         $errors[] = 'erreur nom';
@@ -20,6 +21,19 @@ function addSpending(PDO $dbCo)
         addError('amount_ko');
         $errors[] = 'erreur montant';
     }
+}
+
+/**
+ * Add a transaction into database.
+ *
+ * @param PDO $dbCo - Connection to database.
+ * @return void
+ */
+function addSpending(PDO $dbCo)
+{
+    $errors = [];
+
+    checkFormInfosTransaction();
 
     if (empty($errors)) {
         $queryAdd = $dbCo->prepare(
@@ -29,7 +43,7 @@ function addSpending(PDO $dbCo)
 
         $bindValues = [
             'name' => htmlspecialchars($_POST['name']),
-            'amount' => intval($_POST['amount']),
+            'amount' => floatval($_POST['amount']),
             'date' => validateDate($_POST['date']) ? date("Y-m-d", strtotime($_POST['date'])) : null,
             'category' => intval($_POST['category'])
         ];
@@ -47,5 +61,41 @@ function addSpending(PDO $dbCo)
     }
     if (!empty($errors)) {
         addError('insert_ko');
+    }
+}
+
+
+function modifyTransaction($dbCo)
+{
+    global $transactions;
+    $errors = [];
+
+    checkFormInfosTransaction();
+
+    if (empty($errors)) {
+        $queryUpdate = $dbCo->prepare(
+            'UPDATE transaction
+            SET name = :name, amount = :amount, date_transaction = :date, id_category = :category
+            WHERE id_transaction = :id;'
+        );
+
+        $bindValues = [
+            'name' => htmlspecialchars($_POST['update-name']),
+            'amount' => floatval($_POST['update-amount']),
+            'date' => validateDate($_POST['update-date']) ? date("Y-m-d", strtotime($_POST['update-date'])) : null,
+            'category' => intval($_POST['update-category']),
+            'id' => intval($_POST['id_transaction'])
+        ];
+
+        $isUpdateOk = $queryUpdate->execute($bindValues);
+
+        if ($isUpdateOk) {
+            addMessage('update_ok');
+        }
+        if (!$isUpdateOk) {
+            addError('update_ko');
+        }
+
+        return $isUpdateOk;
     }
 }

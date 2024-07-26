@@ -23,6 +23,10 @@ if (!empty($_POST)) {
     if ($_POST['action'] === 'add-spending') {
         addSpending($dbCo);
     }
+
+    if ($_POST['action'] === 'modify-transaction') {
+        modifyTransaction($dbCo);
+    }
 }
 
 redirectTo();

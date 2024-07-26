@@ -138,7 +138,12 @@ function validateDate($date, $format = 'Y-m-d')
     return $d && $d->format($format) === $date;
 }
 
-
+/**
+ * Get HTML form to modify a transaction.
+ *
+ * @param array $transactions - An array containing all transactions.
+ * @return string - The form to modify a transaction.
+ */
 function getModifyForm(array $transactions): string
 {
     return '
@@ -177,7 +182,8 @@ function getModifyForm(array $transactions): string
             <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
         </div>
 
-        <input type="hidden" name="action" value="modify-operation">
+        <input type="hidden" name="id_transaction" value="'. $transactions[0]['id_transaction'] .'">
+        <input type="hidden" name="action" value="modify-transaction">
         <input type="hidden" name="token" value="' . $_SESSION['token'] . '">
     </form>
 </section>';

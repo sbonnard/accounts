@@ -2,6 +2,7 @@
 
 $messages = [
     'insert_ok' => 'Dépense ajoutée.',
+    'update_ok' => 'Dépense modifiée.'
 ];
 
 $errors = [
@@ -11,7 +12,8 @@ $errors = [
     'name_ko' => 'Le nom de dépense n\'est pas valide',
     'date_ko' => 'La date saisie est invalide',
     'amount_ko' => 'Le montant saisi doit être numérique et ne peut pas être 0',
-    'insert_ko' => 'Erreur lors de l\'ajout d\'une dépense.'
+    'insert_ko' => 'Erreur lors de l\'ajout d\'une dépense.',
+    'update_ko' => 'Erreur lors de la modification d\'une dépense.'
 ];
 
 
