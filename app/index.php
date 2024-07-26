@@ -70,6 +70,7 @@ $balance = calculateBalance($dbCo);
         </section>
 
         <?php
+        if(isset($_GET['action']) && $_GET['action'] === 'modify' && isset($_GET['id']) && intval($_GET['id']))
         echo getModifyForm($currentTransactions);
         ?>
 

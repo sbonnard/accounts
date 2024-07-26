@@ -189,7 +189,7 @@ function getModifyForm(array $transactions): string
  * @param array $arrayGET - Superglobal $_GET
  * @return integer - ID number
  */
-function getIdFromGet(array $arrayGET):int
+function getIdFromGet(array $arrayGET)
 {
     if (!isset($arrayGET['id'])) {
         return '';
